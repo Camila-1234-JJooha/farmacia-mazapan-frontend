@@ -287,6 +287,21 @@ function Medicamentos() {
           border: 1px solid #ddd;
           border-radius: 12px;
           overflow: hidden;
+          width: 100%;
+          min-width: 0;
+        }
+
+        .tabla-responsive {
+          width: 100%;
+          max-width: 100%;
+          overflow-x: auto;
+          -webkit-overflow-scrolling: touch;
+        }
+
+        .tabla-responsive table {
+          width: 100%;
+          min-width: 700px;
+          border-collapse: collapse;
         }
 
 
@@ -441,6 +456,7 @@ function Medicamentos() {
         </h3>
 
 
+        <div className="tabla-responsive">
         <table>
 
           <thead>
@@ -607,6 +623,7 @@ function Medicamentos() {
           </tbody>
 
         </table>
+        </div>
 
       </div>
 

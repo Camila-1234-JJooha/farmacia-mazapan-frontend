@@ -63,6 +63,14 @@ function ListaVentas({ actualizar }) {
           border-radius: 12px;
           overflow: hidden;
           width: 100%;
+          min-width: 0;
+        }
+
+        .tabla-ventas-responsive {
+          width: 100%;
+          max-width: 100%;
+          overflow-x: auto;
+          -webkit-overflow-scrolling: touch;
         }
 
         .lista-ventas-header {
@@ -82,8 +90,9 @@ function ListaVentas({ actualizar }) {
 
         .tabla-ventas {
           width: 100%;
+          min-width: 900px;
           border-collapse: collapse;
-          table-layout: fixed;
+          table-layout: auto;
         }
 
         .tabla-ventas th {
@@ -210,6 +219,7 @@ function ListaVentas({ actualizar }) {
 
       ) : (
 
+        <div className="tabla-ventas-responsive">
         <table className="tabla-ventas">
 
           <thead>
@@ -281,6 +291,7 @@ function ListaVentas({ actualizar }) {
           </tbody>
 
         </table>
+        </div>
 
       )}
 

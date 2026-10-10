@@ -199,6 +199,21 @@ function Clientes() {
           border: 1px solid #ddd;
           border-radius: 12px;
           overflow: hidden;
+          width: 100%;
+          min-width: 0;
+        }
+
+        .tabla-responsive {
+          width: 100%;
+          max-width: 100%;
+          overflow-x: auto;
+          -webkit-overflow-scrolling: touch;
+        }
+
+        .tabla-responsive table {
+          width: 100%;
+          min-width: 600px;
+          border-collapse: collapse;
         }
 
         .clientes-lista h3 {
@@ -311,6 +326,7 @@ function Clientes() {
 
         <h3> Lista de clientes</h3>
 
+        <div className="tabla-responsive">
         <table>
 
           <thead>
@@ -417,6 +433,7 @@ function Clientes() {
           </tbody>
 
         </table>
+        </div>
 
       </div>
 
