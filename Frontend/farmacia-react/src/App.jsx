@@ -16,6 +16,7 @@ function App() {
   const [medicamentos, setMedicamentos] = useState([]);
 
   const [banner, setBanner] = useState(null);
+  const [menuAbierto, setMenuAbierto] = useState(false);
 
 
   const cargarMedicamentos = () => {
@@ -402,22 +403,207 @@ function App() {
         }
 
 
-        @media (max-width: 600px) {
+        .barra-movil {
+          display: none;
+        }
 
+        .fondo-menu-movil {
+          display: none;
+        }
+
+        .vista-contenido {
+          min-width: 0;
+          max-width: 100%;
+        }
+
+        .vista-contenido table {
+          width: 100%;
+          min-width: 520px;
+        }
+
+        @media (max-width: 600px) {
+          .app {
+            display: block;
+            width: 100%;
+            overflow-x: hidden;
+          }
+
+          .barra-movil {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            position: sticky;
+            top: 0;
+            z-index: 20;
+            width: 100%;
+            min-height: 58px;
+            padding: 10px 14px;
+            background: white;
+            border-bottom: 1px solid #ddd;
+            box-shadow: 0 2px 6px rgba(0,0,0,.08);
+          }
+
+          .barra-movil button {
+            border: none;
+            background: #1976d2;
+            color: white;
+            border-radius: 8px;
+            padding: 9px 12px;
+            font-size: 20px;
+            cursor: pointer;
+          }
+
+          .barra-movil strong {
+            color: #1976d2;
+            font-size: 16px;
+          }
+
+          .sidebar {
+            width: min(280px, 85vw);
+            min-height: 100vh;
+            height: 100dvh;
+            overflow-y: auto;
+            position: fixed;
+            z-index: 40;
+            top: 0;
+            left: 0;
+            padding: 22px 16px;
+            transform: translateX(-105%);
+            transition: transform .25s ease;
+            box-shadow: 4px 0 18px rgba(0,0,0,.15);
+          }
+
+          .sidebar.sidebar-abierta {
+            transform: translateX(0);
+          }
+
+          .fondo-menu-movil {
+            display: block;
+            position: fixed;
+            inset: 0;
+            z-index: 30;
+            border: 0;
+            background: rgba(0,0,0,.45);
+          }
+
+          .contenido {
+            margin-left: 0;
+            width: 100%;
+            min-height: calc(100vh - 58px);
+            max-width: 100%;
+          }
+
+          .banner-simi {
+            height: 260px;
+          }
+
+          .banner-simi img {
+            object-position: center;
+          }
+
+          .banner-texto {
+            left: 18px;
+            right: 18px;
+            top: 24px;
+            text-align: center;
+          }
+
+          .banner-texto small {
+            font-size: 13px;
+          }
+
+          .banner-texto h1 {
+            font-size: clamp(22px, 7vw, 30px);
+            line-height: 1.1;
+            overflow-wrap: anywhere;
+          }
+
+          .banner-texto p {
+            font-size: 14px;
+            line-height: 1.4;
+          }
+
+          .productos-contenido {
+            padding: 18px 14px;
+          }
+
+          .productos-titulo {
+            text-align: center;
+          }
+
+          .productos-titulo h2 {
+            font-size: 23px;
+          }
+
+          .productos-titulo p {
+            font-size: 13px;
+          }
+
+          .productos {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 12px;
+          }
+
+          .producto-card {
+            min-width: 0;
+            padding: 10px;
+          }
+
+          .producto-imagen {
+            height: 125px;
+          }
+
+          .producto-card h3 {
+            font-size: 15px;
+            overflow-wrap: anywhere;
+          }
+
+          .producto-card p {
+            font-size: 12px;
+          }
+
+          .producto-card strong {
+            padding: 7px 10px;
+            font-size: 14px;
+          }
+
+          .btn-comprar {
+            padding: 10px 6px;
+            font-size: 12px;
+          }
+
+          .vista-contenido {
+            padding: 18px 12px !important;
+            width: 100%;
+            overflow-x: auto;
+          }
+
+          .vista-contenido > * {
+            max-width: 100%;
+          }
+        }
+
+        @media (max-width: 360px) {
           .productos {
             grid-template-columns: 1fr;
           }
 
-
-          .productos-contenido {
-            padding: 20px;
+          .banner-simi {
+            height: 230px;
           }
-
         }
 
       `}</style>
 
-      <aside className="sidebar">
+      {menuAbierto && (
+        <button
+          className="fondo-menu-movil"
+          aria-label="Cerrar menú"
+          onClick={() => setMenuAbierto(false)}
+        />
+      )}
+
+      <aside className={`sidebar ${menuAbierto ? 'sidebar-abierta' : ''}`}>
 
         <div className="logo">
 
@@ -449,7 +635,7 @@ function App() {
                 ? 'activo'
                 : ''
             }
-            onClick={() => setOpcion('inicio')}
+            onClick={() => { setOpcion('inicio'); setMenuAbierto(false); }}
           >
              Inicio
           </button>
@@ -461,7 +647,7 @@ function App() {
                 ? 'activo'
                 : ''
             }
-            onClick={() => setOpcion('clientes')}
+            onClick={() => { setOpcion('clientes'); setMenuAbierto(false); }}
           >
              Clientes
           </button>
@@ -473,7 +659,7 @@ function App() {
                 ? 'activo'
                 : ''
             }
-            onClick={() => setOpcion('medicamentos')}
+            onClick={() => { setOpcion('medicamentos'); setMenuAbierto(false); }}
           >
              Medicamentos
           </button>
@@ -485,7 +671,7 @@ function App() {
                 ? 'activo'
                 : ''
             }
-            onClick={() => setOpcion('ventas')}
+            onClick={() => { setOpcion('ventas'); setMenuAbierto(false); }}
           >
             Ventas
           </button>
@@ -496,6 +682,16 @@ function App() {
 
 
       <main className="contenido">
+        <div className="barra-movil">
+          <button
+            type="button"
+            aria-label="Abrir menú"
+            onClick={() => setMenuAbierto(true)}
+          >
+            ☰
+          </button>
+          <strong>Farmacia Mazapán</strong>
+        </div>
 
         {opcion === 'inicio' && (
 
@@ -621,7 +817,7 @@ function App() {
 
         {opcion === 'clientes' && (
 
-          <div style={{ padding: '35px' }}>
+          <div className="vista-contenido" style={{ padding: '35px' }}>
 
             <Clientes
               actualizar={actualizar}
@@ -633,7 +829,7 @@ function App() {
 
         {opcion === 'medicamentos' && (
 
-          <div style={{ padding: '35px' }}>
+          <div className="vista-contenido" style={{ padding: '35px' }}>
 
             <Medicamentos
               actualizar={actualizar}
@@ -645,7 +841,7 @@ function App() {
 
         {opcion === 'ventas' && (
 
-          <div style={{ padding: '35px' }}>
+          <div className="vista-contenido" style={{ padding: '35px' }}>
 
             <FormularioVenta
               onVentaRegistrada={actualizarLista}
