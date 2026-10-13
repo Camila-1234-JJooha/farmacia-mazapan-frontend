@@ -269,8 +269,8 @@ function ListaVentas({ actualizar }) {
                   ${Number(venta.total).toFixed(2)}
                 </td>
 
-                <td>
-                  {venta.fecha}
+                <td>{venta.fecha ? String(venta.fecha).split('T')[0] : ''}
+                  
                 </td>
 
                 <td>
